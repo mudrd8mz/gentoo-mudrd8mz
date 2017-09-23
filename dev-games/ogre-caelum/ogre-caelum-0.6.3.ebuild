@@ -23,4 +23,5 @@ RDEPEND="${DEPEND}"
 src_install() {
 	cmake-utils_src_install
 	dosym ../libCaelum.so /usr/lib64/OGRE/libCaelum.so
+	rm -r "${D}"/usr/doc
 }
