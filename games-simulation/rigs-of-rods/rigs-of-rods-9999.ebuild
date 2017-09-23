@@ -17,6 +17,7 @@ DEPEND="
 	>=dev-games/mygui-3.2.2[ogre,-opengl]
 	>=dev-libs/angelscript-2.31.2
 	>=dev-games/ogre-1.9.0[cg,ois,zip]
+	>=dev-games/ogre-caelum-0.6.3
 	>=dev-libs/boost-1.50
 	net-misc/curl[ssl]
 	dev-libs/openssl
@@ -44,9 +45,6 @@ src_install() {
 
 	# TODO: The path to OGRE plugins folder should ideally be somehow detected.
 	sed -i 's|^PluginFolder=/usr/local/lib/OGRE/$|PluginFolder=/usr/lib/OGRE/|' "${D}/usr/share/rigsofrods/bin/plugins.cfg"
-
-	# Comment out loading libCaelum support as this ebuild does not support it yet.
-	sed -i 's|^Plugin=libCaelum.so$|#Plugin=libCaelum.so|' "${D}/usr/share/rigsofrods/bin/plugins.cfg"
 
 	# Append a script for downloading the content pack.
 	wget -O "${D}/usr/share/rigsofrods/bin/content.sh" https://raw.githubusercontent.com/RigsOfRods/ror-linux-buildscripts/master/content.sh
