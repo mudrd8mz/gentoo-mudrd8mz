@@ -39,8 +39,8 @@ src_configure() {
 }
 
 src_install() {
-	dodir "/usr/share/rigsofrods"
-	cp -ar "${S}_build/bin/" "${D}/usr/share/rigsofrods/"
+	dodir "/usr/share/rigsofrods/bin/"
+	cp -ar "${CMAKE_BUILD_DIR}"/bin/* "${D}/usr/share/rigsofrods/bin/"
 
 	# TODO: The path to OGRE plugins folder should ideally be somehow detected.
 	sed -i 's|^PluginFolder=/usr/local/lib/OGRE/$|PluginFolder=/usr/lib/OGRE/|' "${D}/usr/share/rigsofrods/bin/plugins.cfg"
