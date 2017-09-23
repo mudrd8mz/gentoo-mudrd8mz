@@ -41,4 +41,14 @@ src_configure() {
 src_install() {
 	dodir "/usr/share/rigsofrods"
 	cp -ar "${S}_build/bin/" "${D}/usr/share/rigsofrods/"
+
+	# TODO: The path to OGRE plugins folder should ideally be somehow detected.
+	sed -i 's|^PluginFolder=/usr/local/lib/OGRE/$|PluginFolder=/usr/lib/OGRE/|' "${D}/usr/share/rigsofrods/bin/plugins.cfg"
+
+	# Comment out loading libCaelum support as this ebuild does not support it yet.
+	sed -i 's|^Plugin=libCaelum.so$|#Plugin=libCaelum.so|' "${D}/usr/share/rigsofrods/bin/plugins.cfg"
+
+	# Append a script for downloading the content pack.
+	wget -O "${D}/usr/share/rigsofrods/bin/content.sh" https://raw.githubusercontent.com/RigsOfRods/ror-linux-buildscripts/master/content.sh
+	chmod +x "${D}/usr/share/rigsofrods/bin/content.sh"
 }
