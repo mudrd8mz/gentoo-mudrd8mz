@@ -18,6 +18,7 @@ DEPEND="
 	>=dev-libs/angelscript-2.31.2
 	>=dev-games/ogre-1.9.0[cg,ois,zip]
 	>=dev-games/ogre-caelum-0.6.3
+	>=dev-games/ogre-paged-1.2.0
 	>=dev-libs/boost-1.50
 	net-misc/curl[ssl]
 	dev-libs/openssl
