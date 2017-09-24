@@ -33,6 +33,8 @@ PATCHES=(
 	"${FILESDIR}/${PV}-ogre-includes.patch"
 )
 
+ROR_INSTALL_TARGET="/usr/share/rigsofrods/"
+
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE="RelWithDebInfo"
@@ -41,8 +43,8 @@ src_configure() {
 }
 
 src_install() {
-	dodir "/usr/share/rigsofrods/bin/"
-	cp -ar "${CMAKE_BUILD_DIR}"/bin/* "${D}/usr/share/rigsofrods/bin/"
+	dodir "${ROR_INSTALL_TARGET}"/bin/
+	cp -ar "${CMAKE_BUILD_DIR}"/bin/* "${D}/${ROR_INSTALL_TARGET}"/bin/
 
 	# TODO: The path to OGRE plugins folder should ideally be somehow detected.
 	sed -i 's|^PluginFolder=/usr/local/lib/OGRE/$|PluginFolder=/usr/lib/OGRE/|' "${D}/usr/share/rigsofrods/bin/plugins.cfg"
@@ -50,4 +52,12 @@ src_install() {
 	# Append a script for downloading the content pack.
 	wget -O "${D}/usr/share/rigsofrods/bin/content.sh" https://raw.githubusercontent.com/RigsOfRods/ror-linux-buildscripts/master/content.sh
 	chmod +x "${D}/usr/share/rigsofrods/bin/content.sh"
+}
+
+pkg_postinst() {
+	elog "Rigs of Rods binaries have been installed to ${ROR_INSTALL_TARGET}/bin/"
+	elog "They should stay together with the other files such as plugins.cfg."
+	elog "If you never ran Rigs of Rods before you need to run RoRConfig at least once before RoR."
+	elog "RoRConfig sets up the directory for configuration and other files."
+	elog "Run content.sh to download data packs such as maps or vehicles."
 }
