@@ -14,9 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="
-	>=dev-games/ogre-1.9.0
-	"
+DEPEND=">=dev-games/ogre-1.8.0"
 
 RDEPEND="${DEPEND}"
 
