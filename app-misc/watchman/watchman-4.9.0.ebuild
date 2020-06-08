@@ -27,7 +27,7 @@ src_prepare() {
 src_configure() {
 	econf \
 		--enable-conffile="${EPREFIX}"/etc/"${PN}".json \
-		--enable-statedir="${EPREFIX}"/var/run/"${PN}" \
+		--enable-statedir="${EPREFIX}"/var/tmp/"${PN}" \
 		--enable-lenient \
 		$(use_with python) \
 		$(use_with pcre)
